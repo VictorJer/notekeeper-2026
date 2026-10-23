@@ -1,0 +1,19 @@
+<!-- Reutiliza o layout de autenticação e define os textos específicos do cadastro. -->
+<app-pagina-autenticacao titulo="Crie sua conta" descricao="Cadastre-se para guardar e organizar suas ideias.">
+  <form class="space-y-5" (submit)="$event.preventDefault()">
+    <div>
+      <label for="nome" class="mb-2 block text-sm font-medium text-slate-700">Nome</label>
+      <input id="nome" name="nome" type="text" autocomplete="name" required placeholder="Seu nome" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" />
+    </div>
+    <div>
+      <label for="email" class="mb-2 block text-sm font-medium text-slate-700">E-mail</label>
+      <input id="email" name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" />
+    </div>
+    <div>
+      <label for="senha" class="mb-2 block text-sm font-medium text-slate-700">Senha</label>
+      <input id="senha" name="senha" type="password" autocomplete="new-password" minlength="8" required placeholder="Pelo menos 8 caracteres" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" />
+    </div>
+    <button type="submit" class="w-full rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Cadastrar</button>
+  </form>
+  <p class="mt-6 text-center text-sm text-slate-500">Já tem uma conta? <a routerLink="/login" class="font-semibold text-indigo-600 hover:text-indigo-700">Entrar</a></p>
+</app-pagina-autenticacao>
