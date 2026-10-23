@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-slate-50 text-slate-800">
+<header class="min-h-screen bg-slate-50 text-slate-800">
   <aside class="fixed inset-y-0 left-0 z-20 flex w-64 flex-col border-r border-slate-200 bg-white px-4 py-6">
     <a href="#inicio" class="mb-10 flex items-center gap-3 px-3" aria-label="NoteKeeper, início">
       <span class="grid size-10 place-items-center rounded-xl bg-indigo-600 text-white shadow-sm shadow-indigo-200">
@@ -43,6 +43,23 @@
   </aside>
 
   <main id="inicio" class="ml-64 min-h-screen p-8">
+    <section class="flex min-h-[calc(100vh-4rem)] items-center justify-center" aria-labelledby="welcome-title">
+      <div class="w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm sm:p-12">
+        <span class="mx-auto mb-6 grid size-14 place-items-center rounded-2xl bg-indigo-50 text-indigo-600">
+          <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 4.75h6.5L19 9.25v9A1.75 1.75 0 0 1 17.25 20h-9.5A1.75 1.75 0 0 1 6 18.25v-11.75A1.75 1.75 0 0 1 7.75 4.75Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5v4.5h4.5M9 13h6M9 16.5h4" />
+          </svg>
+        </span>
+        <p class="mb-3 text-sm font-semibold text-indigo-600">Suas ideias em um só lugar</p>
+        <h1 id="welcome-title" class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Bem-vindo ao NoteKeeper</h1>
+        <p class="mx-auto mt-4 max-w-md leading-7 text-slate-600">Entre na sua conta para acessar suas notas ou crie um cadastro para começar a organizar suas ideias.</p>
+        <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <a href="/login" class="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Entrar</a>
+          <a href="/cadastro" class="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Cadastrar</a>
+        </div>
+      </div>
+    </section>
     <router-outlet />
   </main>
-</div>
+</header>
