@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PaginaAutenticacao } from '../pagina-autenticacao';
 import { email, form, FormField, minLength, pattern, required } from '@angular/forms/signals';
+import { CadastroRequest } from '../auth.models';
 
 interface CadastroFormModel{
   readonly nome: string;
@@ -30,8 +31,14 @@ export class Cadastro {
     event.preventDefault();
 
 
-    const valorFormulario = this.modelFormulario();
 
-    console.log(valorFormulario);
+    const request: CadastroRequest = {
+      nome: this.modelFormulario().email,
+      email: this.modelFormulario().email,
+      senha: this.modelFormulario().senha,
+    }
+
+    // const valorFormulario = this.modelFormulario();
+    // console.log(valorFormulario);
   }
 }
