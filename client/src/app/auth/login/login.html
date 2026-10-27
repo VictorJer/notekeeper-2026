@@ -1,13 +1,36 @@
 <!-- Reutiliza o layout de autenticação com os textos próprios da tela de login. -->
 <app-pagina-autenticacao titulo="Boas-vindas de volta" descricao="Entre na sua conta para acessar suas notas.">
-  <form class="space-y-5" (submit)="$event.preventDefault()">
+  <form (submit)="enviarFormulario($event)" class="space-y-5">
     <div>
       <label for="email" class="mb-2 block text-sm font-medium text-slate-700">E-mail</label>
-      <input id="email" name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" />
+      <input id="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" 
+        [formField]="formularioLogin.email"
+        [attr.aria-invalid]="formularioLogin.email().touched() && formularioLogin.email().invalid()"
+        [attr.aria-describedby]="
+          formularioLogin.email().touched() && formularioLogin.email().invalid()
+          ? 'email-erro'
+          : null
+        "/>
+          @if (formularioLogin.email().touched() && formularioLogin.email().invalid()){
+          <p id="email-erro" class="mt-1 text-sm text-rose-700">
+            {{ formularioLogin.email().errors()[0].message}}</p>
+        }
     </div>
     <div>
       <label for="senha" class="mb-2 block text-sm font-medium text-slate-700">Senha</label>
-      <input id="senha" name="senha" type="password" autocomplete="current-password" required placeholder="Sua senha" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" />
+      <input id="senha" type="password" autocomplete="current-password" placeholder="Sua senha" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+        [formField]="formularioLogin.senha" 
+        [attr.aria-invalid]="formularioLogin.senha().touched() && formularioLogin.senha().invalid()"
+        [attr.aria-describedby]="
+          formularioLogin.senha().touched() && formularioLogin.senha().invalid()
+          ? 'senha-erro'
+          : null
+        "/>
+
+          @if (formularioLogin.senha().touched() && formularioLogin.senha().invalid()){
+          <p id="senha-erro" class="mt-1 text-sm text-rose-700">
+            {{ formularioLogin.senha().errors()[0].message}}</p>
+        }
     </div>
     <button type="submit" class="w-full rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Entrar</button>
   </form>

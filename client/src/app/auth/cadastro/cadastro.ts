@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { PaginaAutenticacao } from '../pagina-autenticacao';
+import { Component, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { email, form, FormField, minLength, pattern, required } from '@angular/forms/signals';
-import { CadastroRequest } from '../auth.models';
+import { PaginaAutenticacao } from '../shell/pagina-autenticacao';
+import { CadastroConcluidoNavigationState, CadastroRequest } from '../auth.models';
+import { AuthService } from '../auth.service';
 
 interface CadastroFormModel{
   readonly nome: string;
@@ -16,6 +17,9 @@ interface CadastroFormModel{
   templateUrl: './cadastro.html',
 })
 export class Cadastro {
+  private readonly authService = inject(AuthService)
+  private readonly router = inject(Router);
+  
   protected readonly modelFormulario = signal<CadastroFormModel>({ email: '', senha: '', nome: '' });
   protected readonly formularioCadastro = form(this.modelFormulario, (model) =>{
     required(model.nome, { message: 'Informe seu nome.'});
@@ -27,16 +31,27 @@ export class Cadastro {
     pattern(model.senha, /(?=.*\d)(?=.*[a-zA-Z0-9]).+/, {message: 'Inclua pelo menos um número e um caractere especial.'});
   });
 
-  enviarFormulario(event: SubmitEvent) {
+  protected enviarFormulario(event: SubmitEvent): void {
     event.preventDefault();
 
-
+    if (this.formularioCadastro().invalid()) {
+      this.formularioCadastro().markAsTouched();
+      return;
+    }
 
     const request: CadastroRequest = {
-      nome: this.modelFormulario().email,
+      nome: this.modelFormulario().nome,
       email: this.modelFormulario().email,
       senha: this.modelFormulario().senha,
     }
+
+    this.authService.cadastrar(request).subscribe((usuario) => {
+      const estadoNavegacao: CadastroConcluidoNavigationState = {
+        emailCadastrado: usuario.email
+      };
+
+      void this.router.navigateByUrl('/login', { state: estadoNavegacao })
+    });
 
     // const valorFormulario = this.modelFormulario();
     // console.log(valorFormulario);
