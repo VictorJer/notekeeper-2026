@@ -28,3 +28,8 @@ export interface TokenDto{
     readonly AccessToken: string;
     readonly DataExpiracaoEmUtc: string
 }
+
+export interface SessaoAutenticada {
+    readonly token: TokenDto;
+    readonly usuario: UsuarioDto;
+}
