@@ -1,6 +1,9 @@
 <!-- Reutiliza o layout de autenticação e define os textos específicos do cadastro. -->
 <app-pagina-autenticacao titulo="Crie sua conta" descricao="Cadastre-se para guardar e organizar suas ideias.">
   <form (submit)="enviarFormulario($event)" class="space-y-5">
+    @if (mensagemErro(); as mensagem) {
+      <p class="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700" role="alert">{{ mensagem }}</p>
+    }
     <div>
       <label for="nome" class="mb-2 block text-sm font-medium text-slate-700">Nome</label>
       <input id="nome" type="text" autocomplete="name" placeholder="Seu nome" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" 

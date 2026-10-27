@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
-  imports: [RouterLink, RouterOutlet],
+  imports: [RouterLink],
   selector: 'app-home',
   styleUrl: './home.css',
   templateUrl: './home.html',
 })
 export class Home {
-  protected readonly sessao = inject(AuthService).sessao;
+  protected readonly authService = inject(AuthService);
+  protected readonly sessaoAutenticada = inject(AuthService).sessao;
 }

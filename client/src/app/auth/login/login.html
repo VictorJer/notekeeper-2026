@@ -1,6 +1,9 @@
 <!-- Reutiliza o layout de autenticação com os textos próprios da tela de login. -->
 <app-pagina-autenticacao titulo="Boas-vindas de volta" descricao="Entre na sua conta para acessar suas notas.">
   <form (submit)="enviarFormulario($event)" class="space-y-5">
+    @if (mensagemErro(); as mensagem) {
+      <p class="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700" role="alert">{{ mensagem }}</p>
+    }
     <div>
       <label for="email" class="mb-2 block text-sm font-medium text-slate-700">E-mail</label>
       <input id="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" 

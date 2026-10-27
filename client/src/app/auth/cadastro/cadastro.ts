@@ -21,6 +21,7 @@ export class Cadastro {
   private readonly router = inject(Router);
   
   protected readonly modelFormulario = signal<CadastroFormModel>({ email: '', senha: '', nome: '' });
+  protected readonly mensagemErro = signal<string | null>(null);
   protected readonly formularioCadastro = form(this.modelFormulario, (model) =>{
     required(model.nome, { message: 'Informe seu nome.'});
     minLength(model.nome, 3,{ message: 'O nome deve conter pelo menos 3 caracteres.'})
@@ -28,7 +29,7 @@ export class Cadastro {
     email(model.email, { message: 'Informe um email valido.'});
     required(model.senha, { message: 'Informe sua senha.'});
     minLength(model.senha, 8, { message: 'A senha precisa conter 8 caracteres.'})
-    pattern(model.senha, /(?=.*\d)(?=.*[a-zA-Z0-9]).+/, {message: 'Inclua pelo menos um número e um caractere especial.'});
+    pattern(model.senha, /(?=.*\d)(?=.*[^a-zA-Z0-9]).+/, {message: 'Inclua pelo menos um número e um caractere especial.'});
   });
 
   protected enviarFormulario(event: SubmitEvent): void {
@@ -45,15 +46,20 @@ export class Cadastro {
       senha: this.modelFormulario().senha,
     }
 
-    this.authService.cadastrar(request).subscribe((usuario) => {
-      const estadoNavegacao: CadastroConcluidoNavigationState = {
-        emailCadastrado: usuario.email
-      };
+    this.mensagemErro.set(null);
+    this.authService.cadastrar(request).subscribe({
+      next: (usuario) => {
+        const estadoNavegacao: CadastroConcluidoNavigationState = {
+          emailCadastrado: usuario.email
+        };
 
-      void this.router.navigateByUrl('/login', { state: estadoNavegacao })
+        void this.router.navigateByUrl('/login', { state: estadoNavegacao });
+      },
+      error: (error: unknown) => {
+        this.mensagemErro.set(
+          this.authService.mensagemErro(error, 'Não foi possível criar sua conta. Tente novamente.')
+        );
+      }
     });
-
-    // const valorFormulario = this.modelFormulario();
-    // console.log(valorFormulario);
   }
 }

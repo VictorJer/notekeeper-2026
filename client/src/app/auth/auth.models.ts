@@ -1,5 +1,3 @@
-import { email, readonly } from "@angular/forms/signals";
-
 export interface CadastroRequest {
     readonly nome: string;
     readonly email: string;
@@ -22,11 +20,11 @@ export interface LoginRequest {
 }
 
 export interface TokenDto{
-    readonly UsuarioId: string;
-    readonly Nome: string;
-    readonly Email: string;
-    readonly AccessToken: string;
-    readonly DataExpiracaoEmUtc: string
+    readonly usuarioId: string;
+    readonly nome: string;
+    readonly email: string;
+    readonly accessToken: string;
+    readonly dataExpiracaoEmUtc: string;
 }
 
 export interface SessaoAutenticada {
