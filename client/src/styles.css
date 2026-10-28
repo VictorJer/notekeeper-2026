@@ -1,3 +1,120 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+body:not(.modo-escuro) {
+  background: #f1f3f6;
+}
+
+body:not(.modo-escuro) .bg-slate-50,
+body:not(.modo-escuro) [class*='bg-\[#f7f8fc\]'] {
+  background-color: #f1f3f6 !important;
+}
+
+body:not(.modo-escuro) [class*='bg-white'] {
+  background-color: #fafbfc !important;
+}
+
+body:not(.modo-escuro) .hero-note-icon {
+  background-color: rgba(15, 23, 42, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #f8fafc !important;
+}
+
+body:not(.modo-escuro) .inspiration-icon {
+  background-color: rgba(15, 23, 42, 0.9) !important;
+  color: #f8fafc !important;
+}
+
+body.modo-escuro {
+  color-scheme: dark;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+body.modo-escuro [class*='bg-white'],
+body.modo-escuro [class*='bg-\[#f7f8fc\]'],
+body.modo-escuro [class*='bg-\[#faf9f6\]'] {
+  background-color: #111827 !important;
+}
+
+body.modo-escuro .bg-slate-50,
+body.modo-escuro .bg-slate-100,
+body.modo-escuro [class*='bg-indigo-50'],
+body.modo-escuro [class*='bg-amber-50'],
+body.modo-escuro [class*='bg-emerald-50'] {
+  background-color: #1e293b !important;
+}
+
+body.modo-escuro [class*='border-slate-100'],
+body.modo-escuro [class*='border-slate-200'],
+body.modo-escuro [class*='border-indigo-100'],
+body.modo-escuro [class*='border-amber-100'],
+body.modo-escuro [class*='border-emerald-100'],
+body.modo-escuro [class*='border-white'] {
+  border-color: #334155 !important;
+}
+
+body.modo-escuro [class*='text-slate-900'],
+body.modo-escuro [class*='text-slate-950'],
+body.modo-escuro [class*='text-slate-800'] {
+  color: #f1f5f9 !important;
+}
+
+body.modo-escuro [class*='text-slate-700'],
+body.modo-escuro [class*='text-slate-600'],
+body.modo-escuro [class*='text-slate-500'] {
+  color: #cbd5e1 !important;
+}
+
+body.modo-escuro [class*='text-slate-400'] {
+  color: #94a3b8 !important;
+}
+
+body.modo-escuro [class*='text-indigo-700'],
+body.modo-escuro [class*='text-indigo-600'] {
+  color: #a5b4fc !important;
+}
+
+body.modo-escuro [class*='text-amber-700'],
+body.modo-escuro [class*='text-amber-600'] {
+  color: #fcd34d !important;
+}
+
+body.modo-escuro [class*='text-emerald-700'],
+body.modo-escuro [class*='text-emerald-600'] {
+  color: #6ee7b7 !important;
+}
+
+body.modo-escuro input,
+body.modo-escuro textarea,
+body.modo-escuro select {
+  background-color: #1e293b !important;
+  border-color: #475569 !important;
+  color: #f8fafc !important;
+}
+
+body.modo-escuro input::placeholder,
+body.modo-escuro textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+body.modo-escuro [class*='bg-rose-50'] {
+  background-color: #3f1d2e !important;
+}
+
+body.modo-escuro [class*='text-rose-700'] {
+  color: #fda4af !important;
+}
+
+body.modo-escuro .hover\:bg-slate-50:hover {
+  background-color: #334155 !important;
+}
+
+body.modo-escuro .hover\:bg-rose-50:hover {
+  background-color: #3f1d2e !important;
+}
+
+body.modo-escuro [class*='hover\:border-rose-']:hover {
+  border-color: #881337 !important;
+}
