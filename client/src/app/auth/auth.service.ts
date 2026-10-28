@@ -113,7 +113,7 @@ export class AuthService {
 
             const expiracao = new Date(token.dataExpiracaoEmUtc).getTime();
 
-            if (!token.accessToken || !usuario.email || Number.isFinite(expiracao) || expiracao <= Date.now()) {
+            if (!token.accessToken || !usuario.email || !Number.isFinite(expiracao) || expiracao <= Date.now()) {
                 localStorage.removeItem(this.chaveArmazenamento);
                 return null;          
             }
