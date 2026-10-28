@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 
 import { Routes } from '@angular/router';
 import { environment } from '../environments/environment.development';
-import { URL_API } from './auth/auth.tokens';
+import { CHAVE_ARMAZENAMENTO, URL_API } from './auth/auth.tokens';
 
 export const routes: Routes = [
     {
@@ -36,5 +36,9 @@ export const appConfig: ApplicationConfig = {
         // Usa o endereço definido para o ambiente importado neste arquivo.
         useValue: environment.urlApi
     },
+    {
+        provide: CHAVE_ARMAZENAMENTO,
+        useValue: 'certifica+.sessao'
+    }
   ]
 };
