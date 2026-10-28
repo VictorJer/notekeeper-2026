@@ -1,0 +1,88 @@
+<div class="min-h-screen bg-[#f7f8fc] text-slate-800">
+  <main class="mx-auto min-h-screen max-w-5xl px-5 pb-12 pt-5 sm:px-8 sm:pt-8">
+    <header class="mb-10 flex items-center justify-between gap-4">
+      <a routerLink="/" class="flex items-center gap-3" aria-label="NoteKeeper, início">
+        <span class="grid size-10 place-items-center rounded-xl bg-indigo-600 text-white shadow-lg shadow-indigo-200/70">
+          <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 4.75h6.5L19 9.25v9A1.75 1.75 0 0 1 17.25 20h-9.5A1.75 1.75 0 0 1 6 18.25v-11.75A1.75 1.75 0 0 1 7.75 4.75Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M14 5v4.5h4.5M9 13h6M9 16.5h6"/></svg>
+        </span>
+        <span class="text-lg font-bold tracking-tight text-slate-900">NoteKeeper</span>
+      </a>
+      <button type="button" (click)="authService.encerrarSessao()" class="group flex items-center gap-1.5 rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-500 transition hover:border-rose-200 hover:bg-rose-50 hover:text-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-400" aria-label="Sair da conta">
+        <svg class="size-4 transition group-hover:text-rose-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M14 8V6.75A1.75 1.75 0 0 0 12.25 5h-5.5A1.75 1.75 0 0 0 5 6.75v10.5A1.75 1.75 0 0 0 6.75 19h5.5A1.75 1.75 0 0 0 14 17.25V16M10 12h9m0 0-3-3m3 3-3 3"/></svg>
+        <span>Sair</span>
+      </button>
+    </header>
+
+    <div class="mb-8">
+      <a routerLink="/" class="mb-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-indigo-600">← Voltar ao início</a>
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-indigo-500">Organização</p>
+      <h1 class="mt-2 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Categorias</h1>
+      <p class="mt-2 max-w-xl text-sm leading-6 text-slate-500 sm:text-base">Crie categorias para manter suas notas organizadas por assunto.</p>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+      <section class="order-2 rounded-3xl border border-slate-200/80 bg-white shadow-sm lg:order-1" aria-labelledby="lista-categorias">
+        <div class="flex items-center justify-between border-b border-slate-100 px-5 py-5 sm:px-7">
+          <div>
+            <h2 id="lista-categorias" class="text-lg font-bold text-slate-900">Suas categorias</h2>
+            <p class="mt-1 text-sm text-slate-500">{{ categorias().length }} {{ categorias().length === 1 ? 'categoria' : 'categorias' }}</p>
+          </div>
+          <span class="grid size-10 place-items-center rounded-xl bg-amber-50 text-amber-600">
+            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 6.75A2.25 2.25 0 0 1 6.75 4.5h3l1.5 2.25h6A2.25 2.25 0 0 1 19.5 9v8.25a2.25 2.25 0 0 1-2.25 2.25h-10.5a2.25 2.25 0 0 1-2.25-2.25V6.75Z"/></svg>
+          </span>
+        </div>
+        @if (carregando()) {
+          <p class="px-7 py-12 text-center text-sm text-slate-500">Carregando categorias...</p>
+        } @else if (categorias().length === 0) {
+          <div class="px-7 py-14 text-center">
+            <span class="mx-auto grid size-14 place-items-center rounded-2xl bg-amber-50 text-amber-600"><svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 6.75A2.25 2.25 0 0 1 6.75 4.5h3l1.5 2.25h6A2.25 2.25 0 0 1 19.5 9v8.25a2.25 2.25 0 0 1-2.25 2.25h-10.5a2.25 2.25 0 0 1-2.25-2.25V6.75Z"/></svg></span>
+            <h3 class="mt-4 font-bold text-slate-900">Ainda sem categorias</h3>
+            <p class="mt-1 text-sm text-slate-500">Crie a primeira ao lado para começar.</p>
+          </div>
+        } @else {
+          <ul class="divide-y divide-slate-100">
+            @for (categoria of categorias(); track categoria.id) {
+              <li class="flex items-center justify-between gap-4 px-5 py-4 sm:px-7">
+                <div class="flex min-w-0 items-center gap-3">
+                  <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-amber-50 text-sm font-bold text-amber-600">{{ categoria.titulo.charAt(0).toUpperCase() }}</span>
+                  <span class="truncate text-sm font-semibold text-slate-800">{{ categoria.titulo }}</span>
+                </div>
+                <div class="flex shrink-0 items-center gap-1">
+                  <button type="button" (click)="editar(categoria)" class="rounded-lg p-2 text-slate-400 transition hover:bg-indigo-50 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400" [attr.aria-label]="'Editar ' + categoria.titulo">
+                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m16.86 4.86 2.28 2.28M5 19l3.75-.75L18.5 8.5a1.61 1.61 0 0 0-2.28-2.28L6.47 15.97 5 19Z"/></svg>
+                  </button>
+                  <button type="button" (click)="excluir(categoria)" class="rounded-lg p-2 text-slate-400 transition hover:bg-rose-50 hover:text-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-400" [attr.aria-label]="'Excluir ' + categoria.titulo">
+                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 7h14M10 11v5M14 11v5M6.75 7l.75 12h9l.75-12M9 7V4.75h6V7"/></svg>
+                  </button>
+                </div>
+              </li>
+            }
+          </ul>
+        }
+      </section>
+
+      <section class="order-1 h-fit rounded-3xl border border-slate-200/80 bg-white p-5 shadow-sm sm:p-6 lg:order-2" aria-labelledby="formulario-categoria">
+        <h2 id="formulario-categoria" class="font-bold text-slate-900">{{ categoriaEmEdicao() ? 'Editar categoria' : 'Nova categoria' }}</h2>
+        <p class="mt-1 text-sm leading-6 text-slate-500">Use um nome curto e fácil de encontrar.</p>
+        <form class="mt-5 space-y-4" (submit)="$event.preventDefault(); salvar()">
+          <div>
+            <label for="titulo-categoria" class="mb-2 block text-sm font-medium text-slate-700">Título</label>
+            <input id="titulo-categoria" type="text" maxlength="100" [value]="titulo()" (input)="alterarTitulo($event)" placeholder="Ex.: Trabalho" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" [attr.aria-invalid]="mensagemErro() ? true : null" />
+          </div>
+          @if (mensagemErro(); as mensagem) {
+            <p class="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700" role="alert">{{ mensagem }}</p>
+          }
+          @if (mensagemSucesso(); as mensagem) {
+            <p class="rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700" role="status">{{ mensagem }}</p>
+          }
+          <div class="flex gap-2">
+            <button type="submit" [disabled]="salvando()" class="flex-1 rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-indigo-500">{{ salvando() ? 'Salvando...' : (categoriaEmEdicao() ? 'Atualizar' : 'Criar categoria') }}</button>
+            @if (categoriaEmEdicao()) {
+              <button type="button" (click)="cancelarEdicao()" class="rounded-xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-400">Cancelar</button>
+            }
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+</div>

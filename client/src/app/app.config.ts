@@ -20,6 +20,10 @@ export const routes: Routes = [
         loadComponent: () => import('./auth/cadastro/cadastro').then((c) => c.Cadastro),
     },
     {
+        path: 'categorias',
+        loadComponent: () => import('./categorias/categorias').then((c) => c.Categorias),
+    },
+    {
         path: '**',
         redirectTo: '',
     }
